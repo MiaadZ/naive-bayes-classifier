@@ -1,34 +1,43 @@
-clear all;
+%% clean start!
 close all;
+clear variables;
 clc;
-data=xlsread('E:\dataa.xlsx',1);
-n=input('tedad feature ha:');
-y=data(:,end);
-pw0=numel(find(y==0))/numel(y)
-pw1=numel(find(y==1))/numel(y)
-pw0givenx=1
-pw1givenx=1
-for i=1:n
 
-  A=data(:,i);
-  y=data(:,end);
+%% Preprocessing data
+data = xlsread('dataset.xlsx');
+n = length(data(1,:));
+w = data(:,end);
+pw0 = numel(find(w==0))/numel(w);
+pw1 = numel(find(w==1))/numel(w);
+w0_normal_pdf = 1;
+w1_normal_pdf = 1;
 
-  mu0A=mean(A(y==0));
-  sigma0A=std(A(y==0));
-  mu1A=mean(A(y==1));
-  sigma1A=std(A(y==1));
+%% Calculate and Process data
+for i=1:n-1
 
-  xtest=81;
-  pw0givenx=pw0givenx*normpdf(xtest,mu0A,sigma0A)
-  pw1givenx=pw1givenx*normpdf(xtest,mu1A,sigma1A)
+    C = data(:,i);
+    w = data(:,end);
+
+    w0_average = mean(C(w==0));
+    w0_sigma = std(C(w==0));
+    w1_average = mean(C(w==1));
+    w1_sigma = std(C(w==1));
+
+    % test value must be compatible with feature number.
+    % e.g: first column is Student IQ so we pass 150 and
+    % second column is Student mark so we pass 18
+    test = [150, 18];
+    w0_normal_pdf = w0_normal_pdf*normpdf(test(i), w0_average, w0_sigma);
+    w1_normal_pdf = w1_normal_pdf*normpdf(test(i), w1_average, w1_sigma);
 
 end
 
-pw0givenx=pw0givenx*pw0
-pw1givenx=pw1givenx*pw1
+w0_normal_pdf = w0_normal_pdf*pw0;
+w1_normal_pdf = w1_normal_pdf*pw1;
 
-if pw1givenx > pw0givenx
-    disp('naive bayes prediction is passed .')
-  else
-     disp('naive bayes prediction is failed .')
+%% Display result
+if w1_normal_pdf > w0_normal_pdf
+	disp('Naive Bayes Prediction Passed')
+else
+    disp('Naive Bayes Prediction Failed')
 end   
