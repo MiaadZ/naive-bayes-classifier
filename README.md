@@ -1,6 +1,6 @@
 # Naive Bayes Classifier
 
-Naive Bayes Classifier using python and matlab designed based on Excel file input
+Naive Bayes Classifier using python and matlab designed based on Excel file input.
 
 ## installation
 
