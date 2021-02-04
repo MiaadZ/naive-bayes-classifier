@@ -12,7 +12,7 @@ pip install -r requirements.txt
 
 ### Discription
 
-Excel file contains rows and columns which are features and labels which can be modified.
+Excel file contains rows and columns which are features and labels and can be modified.
 
 ### Example
 
