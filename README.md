@@ -14,7 +14,7 @@ pip install -r requirements.txt
 
 Excel file contains rows and columns which are features and labels which can be modified.
 
-Example:
+### Example
 
 Consider we want to predict which students will be qualified and pass the course, we have 2 labels, first (column) is the IQ and second (column) is the Student Mark for the course, every row includes IQ and Mark for each student, the last column is the label whether the student passes the course (1) or fails (0).
 
